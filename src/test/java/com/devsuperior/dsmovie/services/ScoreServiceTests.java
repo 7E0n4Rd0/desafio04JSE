@@ -54,6 +54,7 @@ public class ScoreServiceTests {
 		movieExistingId = 1L;
 		movieNonExistingId = 100L;
 		movieEntity = MovieFactory.createMovieEntity();
+		movieEntity.getScores().add(scoreEntity);
 		movieDTO = new MovieDTO(movieEntity);
 		user = UserFactory.createUserEntity();
 
@@ -77,7 +78,7 @@ public class ScoreServiceTests {
 		movie.setId(movieNonExistingId);
 		scoreEntity.setMovie(movie);
 		ScoreDTO dto = new ScoreDTO(scoreEntity);
-		
+
 		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 			service.saveScore(dto);
 		});
